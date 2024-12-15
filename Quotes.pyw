@@ -15,10 +15,10 @@ author=None
 def read_file_location():
     global mfl
     try:
-        file = open('/assets/file_location.txt', 'r')
+        file = open('assets/file_location.txt', 'r')
         mfl = file.read().strip()
         file.close()
-        if not os.path.isfile(os.path.join(mfl, '/assets/icon.ico')):
+        if not os.path.isfile(os.path.join(mfl, 'assets/icon.ico')):
             get_file_location()
     except FileNotFoundError:
         get_file_location()
@@ -34,9 +34,9 @@ def get_file_location():
     main.mainloop()
 def select_file_location():
     global main
-    mfl = str(tkfilebrowser.askopendirname()) + "/assets/"
+    mfl = str(tkfilebrowser.askopendirname())
     mfl = mfl.replace('\\', '/')
-    file = open('/assets/file_location.txt', 'w')
+    file = open('assets/file_location.txt', 'w')
     file.write(mfl)
     file.close()
     main.destroy()
@@ -46,10 +46,10 @@ class QuoteWidget:
         global mfl
         self.app = QApplication(sys.argv)
         self.window = QLabel()
-        self.app.setWindowIcon(QIcon(mfl + "icon.ico"))
+        self.app.setWindowIcon(QIcon(mfl + "assets/icon.ico"))
         self.window.setWindowFlags(Qt.FramelessWindowHint)
         self.window.setAttribute(Qt.WA_TranslucentBackground)
-        self.window.setPixmap(QPixmap(mfl + "paper.png").scaled(500, 500))
+        self.window.setPixmap(QPixmap(mfl + "assets/paper.png").scaled(500, 500))
         self.window.resize(self.window.pixmap().size())
         self.window.move(1450, 1)
         self.frame = QFrame(self.window)
@@ -62,19 +62,19 @@ class QuoteWidget:
         self.timer.timeout.connect(self.update_quote)
         self.timer.start(60000)
         store_button = QLabel(self.window)
-        store_button.setPixmap(QPixmap(mfl+"save.png").scaled(20, 20)) 
+        store_button.setPixmap(QPixmap(mfl+"assets/save.png").scaled(20, 20)) 
         store_button.setAlignment(Qt.AlignCenter)
         store_button.setStyleSheet("background-color: transparent;")
         store_button.move(store_button.width()+30, 70)
         store_button.mousePressEvent = self.store_quote
         previous_button = QLabel(self.window)
-        previous_button.setPixmap(QPixmap(mfl+"previous.png").scaled(20, 20)) 
+        previous_button.setPixmap(QPixmap(mfl+"assets/previous.png").scaled(20, 20)) 
         previous_button.setAlignment(Qt.AlignCenter)
         previous_button.setStyleSheet("background-color: transparent;")
         previous_button.move(previous_button.width()+5, 70)
         previous_button.mousePressEvent = self.show_previous_quote
         close_button = QLabel(self.window)
-        close_button.setPixmap(QPixmap(mfl+"close_1.png").scaled(40, 40)) 
+        close_button.setPixmap(QPixmap(mfl+"assets/close_1.png").scaled(40, 40)) 
         close_button.setAlignment(Qt.AlignCenter)
         close_button.setStyleSheet("background-color: transparent;")
         close_button.move(self.window.width() - close_button.width() - 40, 60)

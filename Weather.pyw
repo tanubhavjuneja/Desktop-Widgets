@@ -25,10 +25,10 @@ def get_weather():
     icon_code=weather_data['weather'][0]['icon']
     icon_url = f"http://openweathermap.org/img/w/{icon_code}.png"
     response = requests.get(icon_url, stream=True)
-    with open(mfl+"weather_icon.png", "wb") as f:
+    with open(mfl+"assets/weather_icon.png", "wb") as f:
         for chunk in response.iter_content(chunk_size=128):
             f.write(chunk)
-    icon=ctk.CTkImage(Image.open(mfl+"weather_icon.png"),size=(150,150))
+    icon=ctk.CTkImage(Image.open(mfl+"assets/weather_icon.png"),size=(150,150))
     weather_icon.configure(image=icon)
     ist_offset = datetime.timedelta(hours=5, minutes=30)
     sunrise_datetime = datetime.datetime.utcfromtimestamp(weather_data['sys']['sunrise'])+ist_offset
@@ -67,10 +67,10 @@ def send_quote():
 def read_file_location():
     global mfl
     try:
-        file=open('/assets/file_location.txt', 'r')
+        file=open('assets/file_location.txt', 'r')
         mfl = file.read().strip()
         file.close()
-        if not os.path.isfile(os.path.join(mfl, '/assets/close.png')):
+        if not os.path.isfile(os.path.join(mfl, 'assets/close.png')):
             get_file_location()
     except FileNotFoundError:
         get_file_location()
@@ -86,9 +86,9 @@ def get_file_location():
     main.mainloop()
 def select_file_location():
     global main
-    mfl = str(tkfilebrowser.askopendirname())+"/assets/"
+    mfl = str(tkfilebrowser.askopendirname())
     mfl = mfl.replace('\\', '/')
-    file=open('/assets/file_location.txt', 'w')
+    file=open('assets/file_location.txt', 'w')
     file.write(mfl)
     file.close()
     main.destroy()
@@ -100,7 +100,7 @@ weather_window = ctk.CTk()
 weather_window.title("Weather")
 weather_window.geometry("400x290+1500+720")
 weather_window.overrideredirect(True)
-close_icon = ctk.CTkImage(Image.open(mfl + "close.png"), size=(13, 13))
+close_icon = ctk.CTkImage(Image.open(mfl + "assets/close.png"), size=(13, 13))
 close_button = ctk.CTkButton(weather_window, image=close_icon, command=close_window, fg_color="gray14", text="", width=1)
 close_button.place(relx=0.928, rely=0.01)
 weather_label = ctk.CTkLabel(weather_window, text="Weather", font=("Arial", 20, "bold"))

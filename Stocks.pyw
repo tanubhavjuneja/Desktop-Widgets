@@ -101,10 +101,10 @@ def update_stock_prices():
 def read_file_location():
     global mfl
     try:
-        file=open('/assets/file_location.txt', 'r')
+        file=open('assets/file_location.txt', 'r')
         mfl = file.read().strip()
         file.close()
-        if not os.path.isfile(os.path.join(mfl, '/assets/close.png')):
+        if not os.path.isfile(os.path.join(mfl, 'assets/close.png')):
             get_file_location()
     except FileNotFoundError:
         get_file_location()
@@ -120,9 +120,9 @@ def get_file_location():
     main.mainloop()
 def select_file_location():
     global main
-    mfl = str(tkfilebrowser.askopendirname())+"/assets/"
+    mfl = str(tkfilebrowser.askopendirname())
     mfl = mfl.replace('\\', '/')
-    file=open('/assets/file_location.txt', 'w')
+    file=open('assets/file_location.txt', 'w')
     file.write(mfl)
     file.close()
     main.destroy()
@@ -132,7 +132,7 @@ stock_window = ctk.CTk()
 stock_window.title("Mood")
 stock_window.geometry("420x530+1490+490")
 stock_window.overrideredirect(True)
-close_icon = ctk.CTkImage(Image.open(mfl + "close.png"), size=(13, 13))
+close_icon = ctk.CTkImage(Image.open(mfl + "assets/close.png"), size=(13, 13))
 close_button = ctk.CTkButton(stock_window, image=close_icon, command=close_window, fg_color="gray14", text="", width=1)
 close_button.place(relx=0.928, rely=0.01)
 stock_label = ctk.CTkLabel(stock_window, text="Stock Prices", font=("Arial", 20, "bold"))
