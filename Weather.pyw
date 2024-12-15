@@ -17,7 +17,7 @@ def close_window():
     sys.exit()
 def get_weather():
     global sent
-    weather_api_key = '9bc99d2aca28c08cf29f9019b4637c02'
+    weather_api_key = 'your_api_key'
     weather_url = f'http://api.openweathermap.org/data/2.5/weather?q={weather_city},in&appid={weather_api_key}'
     response = requests.get(weather_url)
     weather_data = response.json()
